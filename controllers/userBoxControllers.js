@@ -1,11 +1,8 @@
 import pool from "../config/databaseConfig.js";
 
-// http://localhost:8080/api/boxes/user?userId=xyz&boxId=123
 //GET user's boxes
 const getUserBoxes = async (req, res) => {
   const { userid } = req.params;
-  //   const userId = req.query.userId;
-  //   const boxId = req.query.boxId; since we are getting all the boxes
   const [result] = await pool.query(
     `
     SELECT * 
