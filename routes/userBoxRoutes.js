@@ -1,5 +1,9 @@
 import express from "express";
-import { getUserBoxes, createBox } from "../controllers/userBoxControllers.js";
+import {
+  getUserBoxes,
+  createBox,
+  updateUserBox,
+} from "../controllers/userBoxControllers.js";
 
 const router = express.Router();
 
@@ -8,5 +12,8 @@ router.get("/:userid", getUserBoxes);
 
 //POST create a box
 router.post("/", createBox);
+
+//UPDATE user's box
+router.put("/", updateUserBox);
 
 export default router;
