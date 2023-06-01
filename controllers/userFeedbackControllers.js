@@ -26,7 +26,7 @@ const updateUserFeedback = async (req, res) => {
   );
   if (checkIfExists.length === 0) {
     // Row not found, send error response
-    return res.status(404).json({ error: "Row not found" });
+    return res.status(404).json({ error: "Feedback not found" });
   }
 
   const [result] = await pool.query(
@@ -41,4 +41,33 @@ const updateUserFeedback = async (req, res) => {
   res.status(200).json(result);
 };
 
-export { getUserFeedbacks, updateUserFeedback };
+//DELETE user's feedback
+const deleteUserFeedback = async (req, res) => {
+  const userId = req.query.userId;
+  const feedbackId = req.query.feedbackId;
+  const [checkIfExists] = await pool.query(
+    `
+            SELECT * 
+            FROM feedbacks
+            WHERE user_id = ?
+            AND feedback_id = ?`,
+    [userId, feedbackId]
+  );
+  if (checkIfExists.length === 0) {
+    // Row not found, send error response
+    return res.status(404).json({ error: "Feedback not found" });
+  }
+
+  const [result] = await pool.query(
+    `
+    DELETE FROM feedbacks
+    WHERE user_id = ? 
+    AND feedback_id = ?;
+      `,
+    [userId, feedbackId]
+  );
+
+  res.status(200).json(result);
+};
+
+export { getUserFeedbacks, updateUserFeedback, deleteUserFeedback };
