@@ -1,5 +1,4 @@
 import express from "express";
-// import router from "./routes/boxRoutes.js";
 import boxRoutes from "./routes/boxRoutes.js";
 import feedbackRoutes from "./routes/feedbackRoutes.js";
 import userBoxRoutes from "./routes/userBoxRoutes.js";
