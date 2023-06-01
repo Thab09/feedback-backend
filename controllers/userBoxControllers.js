@@ -60,4 +60,33 @@ const updateUserBox = async (req, res) => {
   res.status(200).json(result);
 };
 
-export { getUserBoxes, createBox, updateUserBox };
+//DELETE user's box
+const deleteUserBox = async (req, res) => {
+  const userId = req.query.userId;
+  const boxId = req.query.boxId;
+  const [checkIfExists] = await pool.query(
+    `
+            SELECT * 
+            FROM boxes
+            WHERE user_id = ?
+            AND box_id = ?`,
+    [userId, boxId]
+  );
+  if (checkIfExists.length === 0) {
+    // Box not found, send error response
+    return res.status(404).json({ error: "Box not found" });
+  }
+
+  const [result] = await pool.query(
+    `
+    DELETE FROM boxes
+    WHERE user_id = ? 
+    AND box_id = ?;
+      `,
+    [userId, boxId]
+  );
+
+  res.status(200).json(result);
+};
+
+export { getUserBoxes, createBox, updateUserBox, deleteUserBox };

@@ -3,6 +3,7 @@ import {
   getUserBoxes,
   createBox,
   updateUserBox,
+  deleteUserBox,
 } from "../controllers/userBoxControllers.js";
 
 const router = express.Router();
@@ -15,5 +16,8 @@ router.post("/", createBox);
 
 //UPDATE user's box
 router.put("/", updateUserBox);
+
+//DELETE user's box
+router.delete("/", deleteUserBox);
 
 export default router;
