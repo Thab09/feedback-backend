@@ -4,12 +4,12 @@ import {
   createBox,
   updateUserBox,
   deleteUserBox,
-} from "../controllers/userBoxControllers.js";
+} from "../controllers/userBox.controller.js";
 
 const router = express.Router();
 
 //GET user's boxes
-router.get("/:userid", getUserBoxes);
+router.get("/:userId", getUserBoxes);
 
 //POST create a box
 router.post("/", createBox);

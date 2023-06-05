@@ -1,14 +1,18 @@
 import express from "express";
 import {
   getUserFeedbacks,
+  createUserFeedback,
   updateUserFeedback,
   deleteUserFeedback,
-} from "../controllers/userFeedbackControllers.js";
+} from "../controllers/userFeedback.controller.js";
 
 const router = express.Router();
 
 //GET user's feedbacks
-router.get("/:userid", getUserFeedbacks);
+router.get("/:userId", getUserFeedbacks);
+
+//POST create a box (user)
+router.post("/", createUserFeedback);
 
 //UPDATE user's feedback
 router.put("/", updateUserFeedback);
