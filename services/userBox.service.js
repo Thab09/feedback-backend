@@ -70,7 +70,7 @@ const deleteUserBoxService = async (userId, boxId) => {
   return result;
 };
 
-const checkIfExists = async (userId, boxId) => {
+const checkIfBoxExists = async (userId, boxId) => {
   const [check] = await pool.query(
     `
     SELECT * 
@@ -89,5 +89,5 @@ export {
   createBoxService,
   updateUserBoxService,
   deleteUserBoxService,
-  checkIfExists,
+  checkIfBoxExists,
 };

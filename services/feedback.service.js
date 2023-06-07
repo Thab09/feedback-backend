@@ -31,4 +31,16 @@ const createGuestFeedbackService = async (
   return result;
 };
 
-export { getFeedbacksService, createGuestFeedbackService };
+const checkIfBoxExists = async (boxId) => {
+  const [check] = await pool.query(
+    `
+    SELECT * 
+    FROM boxes
+    WHERE box_id = ?`,
+    [boxId]
+  );
+  if (check.length === 0) return false;
+
+  return true;
+};
+export { getFeedbacksService, createGuestFeedbackService, checkIfBoxExists };

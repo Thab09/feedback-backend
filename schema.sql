@@ -5,8 +5,8 @@ CREATE TABLE boxes (
     box_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     user_id INTEGER NOT NULL,
     user_name VARCHAR(255) NOT NULL,
-    box_title VARCHAR(255) NOT NULL,
-    box_description VARCHAR(255) NOT NULL,
+    box_title TEXT NOT NULL,
+    box_description TEXT NOT NULL,
     box_open BOOLEAN NOT NULL,
     box_public BOOLEAN NOT NULL,
     created TIMESTAMP NOT NULL DEFAULT NOW()

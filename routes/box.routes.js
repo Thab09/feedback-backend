@@ -10,7 +10,7 @@ const router = express.Router();
 //GET all boxes
 router.get("/", getBoxes);
 
-//GET all boxes
+//GET all public boxes
 router.get("/public", getPublicBoxes);
 
 //GET one box
