@@ -1,11 +1,11 @@
 import Joi from "joi";
 
 const getUserBoxesSchema = Joi.object({
-  userId: Joi.number().integer().required(),
+  userId: Joi.string().max(255).required(),
 });
 
 const createBoxSchema = Joi.object({
-  userId: Joi.number().integer().required(),
+  userId: Joi.string().max(255).required(),
   userName: Joi.string().max(255).required(),
   boxTitle: Joi.string().min(5).max(500).required(),
   boxDescription: Joi.string().min(10).max(800).required(),
@@ -14,7 +14,7 @@ const createBoxSchema = Joi.object({
 });
 
 const updateBoxSchema = Joi.object({
-  userId: Joi.number().integer().required(),
+  userId: Joi.string().max(255).required(),
   boxId: Joi.number().integer().required(),
   boxTitle: Joi.string().min(5).max(500).required(),
   boxDescription: Joi.string().min(10).max(800).required(),
@@ -23,7 +23,7 @@ const updateBoxSchema = Joi.object({
 });
 
 const deleteBoxSchema = Joi.object({
-  userId: Joi.number().integer().required(),
+  userId: Joi.string().max(255).required(),
   boxId: Joi.number().integer().required(),
 });
 
