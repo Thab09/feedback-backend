@@ -24,6 +24,9 @@ const getUserFeedbacks = async (req, res) => {
     const { userId } = req.params;
 
     const result = await getUserFeedbacksService(userId);
+    if (result.length === 0) {
+      return res.status(204).json("You have not given any feedbacks yet.");
+    }
 
     res.status(200).json(result);
   } catch (error) {
@@ -66,7 +69,7 @@ const updateUserFeedback = async (req, res) => {
 
     const check = await checkIfExists(userId, feedbackId);
     if (!check) {
-      return res.status(404).json({ error: "Box not found" });
+      return res.status(204).json("Feedback does not exist.");
     }
 
     const result = await updateUserFeedbackService(
@@ -92,7 +95,7 @@ const deleteUserFeedback = async (req, res) => {
 
     const check = await checkIfExists(userId, feedbackId);
     if (!check) {
-      return res.status(404).json({ error: "Box not found" });
+      return res.status(204).json("Feedback does not exist.");
     }
 
     const result = await deleteUserFeedbackService(userId, feedbackId);

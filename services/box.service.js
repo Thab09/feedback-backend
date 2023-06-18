@@ -1,16 +1,27 @@
 import pool from "../config/databaseConfig.js";
 
 const getBoxesService = async () => {
-  const [result] = await pool.query(`SELECT * FROM boxes`);
+  const [result] = await pool.query(
+    `
+    SELECT * 
+    FROM boxes
+    WHERE box_active = ?
+    `,
+    [1]
+  );
   return result;
 };
 
 const getPublicBoxesService = async () => {
-  const [result] = await pool.query(`
-  SELECT * 
-  FROM boxes
-  WHERE box_public = 1
-  `);
+  const [result] = await pool.query(
+    `
+    SELECT * 
+    FROM boxes
+    WHERE box_public = 1
+    AND box_active = ?
+    `,
+    [userId, 1]
+  );
   return result;
 };
 

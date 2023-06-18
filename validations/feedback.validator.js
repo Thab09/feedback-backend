@@ -6,7 +6,6 @@ const getFeedbackSchema = Joi.object({
 
 const createGuestFeedbackSchema = Joi.object({
   boxId: Joi.number().integer().required(),
-  userId: Joi.string().max(255).required(),
   userName: Joi.string().max(255).required(),
   feedbackDescription: Joi.string().min(2).max(500).required(),
 });

@@ -16,7 +16,6 @@ const getFeedbacksService = async (boxId) => {
 //POST create a feedback (guests)
 const createGuestFeedbackService = async (
   boxId,
-  userId,
   userName,
   feedbackDescription
 ) => {
@@ -26,7 +25,7 @@ const createGuestFeedbackService = async (
     (box_id, user_id, user_name, feedback_description )
     VALUES (?,?,?,?)
     `,
-    [boxId, userId, userName, feedbackDescription]
+    [boxId, "guest_id", userName, feedbackDescription]
   );
   return result;
 };

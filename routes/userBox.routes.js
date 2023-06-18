@@ -18,6 +18,6 @@ router.post("/", createBox);
 router.put("/", updateUserBox);
 
 //DELETE user's box
-router.delete("/", deleteUserBox);
+router.put("/delete", deleteUserBox);
 
 export default router;

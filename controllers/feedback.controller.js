@@ -21,12 +21,12 @@ const getFeedbacks = async (req, res) => {
 
     const check = await checkIfBoxExists(boxId);
     if (!check) {
-      return res.status(404).json({ error: "Box not found" });
+      return res.status(204).json("Box not found");
     }
 
     const result = await getFeedbacksService(boxId);
     if (result.length === 0) {
-      return res.status(404).json("No Content Found");
+      return res.status(204).json("There are no feedbacks on this box yet.");
     }
 
     res.status(200).json(result);
@@ -45,16 +45,15 @@ const createGuestFeedback = async (req, res) => {
       return res.status(404).send(error.details);
     }
 
-    const { boxId, userId, userName, feedbackDescription } = req.body;
+    const { boxId, userName, feedbackDescription } = req.body;
 
     const check = await checkIfBoxExists(boxId);
     if (!check) {
-      return res.status(404).json({ error: "Box not found" });
+      return res.status(204).json("Box not found");
     }
 
     const result = await createGuestFeedbackService(
       boxId,
-      userId,
       userName,
       feedbackDescription
     );

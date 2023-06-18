@@ -9,7 +9,7 @@ const getBoxes = async (req, res) => {
   try {
     const result = await getBoxesService();
     if (result.length === 0) {
-      return res.status(404).json("No Content Found");
+      return res.status(204).json("There are no boxes.");
     }
     res.status(200).json(result);
   } catch (error) {
@@ -22,7 +22,7 @@ const getPublicBoxes = async (req, res) => {
   try {
     const result = await getPublicBoxesService();
     if (result.length === 0) {
-      return res.status(404).json("No Content Found");
+      return res.status(204).json("There are no public boxes.");
     }
     res.status(200).json(result);
   } catch (error) {
@@ -36,7 +36,7 @@ const getBox = async (req, res) => {
     const { boxId } = req.params;
     const result = await getBoxService(boxId);
     if (result.length === 0) {
-      return res.status(404).json("No Content Found");
+      return res.status(204).json("Box not found.");
     }
     res.status(200).json(result);
   } catch (error) {

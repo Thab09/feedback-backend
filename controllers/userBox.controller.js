@@ -17,6 +17,7 @@ import {
 const getUserBoxes = async (req, res) => {
   try {
     const { error } = validateUserId.validate(req.params);
+
     if (error) {
       return res.status(404).send(error.details);
     }
@@ -24,6 +25,10 @@ const getUserBoxes = async (req, res) => {
     const { userId } = req.params;
 
     const result = await getUserBoxesService(userId);
+
+    if (result.length === 0) {
+      res.status(204).json({ message: "You currently have no boxes." });
+    }
 
     res.status(200).json(result);
   } catch (error) {
@@ -51,7 +56,7 @@ const createBox = async (req, res) => {
       boxPublic
     );
 
-    return res.status(200).json(result.insertId);
+    return res.status(201).json(result.insertId);
   } catch (error) {
     res.status(404).json(error);
   }
@@ -70,7 +75,7 @@ const updateUserBox = async (req, res) => {
 
     const check = await checkIfBoxExists(userId, boxId);
     if (!check) {
-      return res.status(404).json({ error: "Box not found" });
+      return res.status(204).json({ error: "Box not found" });
     }
 
     const result = await updateUserBoxService(
@@ -88,6 +93,7 @@ const updateUserBox = async (req, res) => {
 };
 
 //DELETE user's box
+//localhost:8080/api/users/boxes/delete?userId=2327&boxId=14
 const deleteUserBox = async (req, res) => {
   try {
     const { error } = validateBoxDeletion.validate(req.query);
@@ -100,7 +106,7 @@ const deleteUserBox = async (req, res) => {
 
     const check = await checkIfBoxExists(userId, boxId);
     if (!check) {
-      return res.status(404).json({ error: "Box not found" });
+      return res.status(204).json({ error: "Box not found" });
     }
 
     const result = await deleteUserBoxService(userId, boxId);

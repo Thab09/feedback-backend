@@ -7,8 +7,9 @@ const getUserBoxesService = async (userId) => {
     SELECT * 
     FROM boxes
     WHERE user_id = ?
+    AND box_active = ?
     `,
-    [userId]
+    [userId, 1]
   );
   return result;
 };
@@ -25,10 +26,10 @@ const createBoxService = async (
   const [result] = await pool.query(
     `
     INSERT INTO boxes 
-    (user_id, user_name, box_title, box_description, box_open, box_public)
-    VALUES (?,?,?,?,?,?)
+    (user_id, user_name, box_title, box_description, box_open, box_public, box_active)
+    VALUES (?,?,?,?,?,?,?)
     `,
-    [userId, userName, boxTitle, boxDescription, boxOpen, boxPublic]
+    [userId, userName, boxTitle, boxDescription, boxOpen, boxPublic, 1]
   );
   return result;
 };
@@ -60,11 +61,16 @@ const updateUserBoxService = async (
 const deleteUserBoxService = async (userId, boxId) => {
   const [result] = await pool.query(
     `
-    DELETE FROM boxes
+    UPDATE boxes
+    SET box_title = ?,
+    box_description = ?,
+    box_open = ?,
+    box_public = ?,
+    box_active = ?
     WHERE user_id = ? 
     AND box_id = ?;
       `,
-    [userId, boxId]
+    ["Deleted Box", "Box has been deleted by the user.", 0, 0, 0, userId, boxId]
   );
 
   return result;
@@ -76,8 +82,9 @@ const checkIfBoxExists = async (userId, boxId) => {
     SELECT * 
     FROM boxes
     WHERE user_id = ?
-    AND box_id = ?`,
-    [userId, boxId]
+    AND box_id = ?
+    AND box_active = ?`,
+    [userId, boxId, 1]
   );
   if (check.length === 0) return false;
 

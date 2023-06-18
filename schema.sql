@@ -9,6 +9,7 @@ CREATE TABLE boxes (
     box_description TEXT NOT NULL,
     box_open BOOLEAN NOT NULL,
     box_public BOOLEAN NOT NULL,
+    box_active BOOLEAN,
     created TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
