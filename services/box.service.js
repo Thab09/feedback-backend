@@ -17,10 +17,10 @@ const getPublicBoxesService = async () => {
     `
     SELECT * 
     FROM boxes
-    WHERE box_public = 1
+    WHERE box_public = ?
     AND box_active = ?
     `,
-    [userId, 1]
+    [1, 1]
   );
   return result;
 };

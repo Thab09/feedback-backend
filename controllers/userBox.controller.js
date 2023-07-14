@@ -27,7 +27,7 @@ const getUserBoxes = async (req, res) => {
     const result = await getUserBoxesService(userId);
 
     if (result.length === 0) {
-      res.status(204).json({ message: "You currently have no boxes." });
+      return res.status(204).json("There are no boxes.");
     }
 
     res.status(200).json(result);
@@ -67,7 +67,7 @@ const updateUserBox = async (req, res) => {
   try {
     const { error } = validateBoxUpdation.validate(req.body);
     if (error) {
-      return res.status(404).send(error.details);
+      return res.status(404).json(error.details);
     }
 
     const { userId, boxId, boxTitle, boxDescription, boxOpen, boxPublic } =
@@ -86,7 +86,7 @@ const updateUserBox = async (req, res) => {
       boxPublic
     );
 
-    res.status(200).json(result);
+    res.status(200).json(result.info);
   } catch (error) {
     res.status(404).json(error);
   }

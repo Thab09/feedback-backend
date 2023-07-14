@@ -29,7 +29,7 @@ const getFeedbacks = async (req, res) => {
       return res.status(204).json("There are no feedbacks on this box yet.");
     }
 
-    res.status(200).json(result);
+    return res.status(200).json(result);
   } catch (error) {
     res.status(404).json(error);
   }
@@ -58,7 +58,7 @@ const createGuestFeedback = async (req, res) => {
       feedbackDescription
     );
 
-    res.status(201).json(result);
+    return res.status(201).json(result);
   } catch (error) {
     res.status(404).json(error);
   }

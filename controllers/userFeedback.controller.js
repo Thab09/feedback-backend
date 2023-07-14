@@ -28,9 +28,9 @@ const getUserFeedbacks = async (req, res) => {
       return res.status(204).json("You have not given any feedbacks yet.");
     }
 
-    res.status(200).json(result);
+    return res.status(200).json(result);
   } catch (error) {
-    res.status(400).json(error);
+    res.status(404).json(error);
   }
 };
 
@@ -51,7 +51,7 @@ const createUserFeedback = async (req, res) => {
       feedbackDescription
     );
 
-    res.status(201).json(result);
+    return res.status(201).json(result);
   } catch (error) {
     res.status(404).json(error);
   }
@@ -76,7 +76,7 @@ const updateUserFeedback = async (req, res) => {
       feedbackId,
       feedbackDescription
     );
-    res.status(200).json(result);
+    return res.status(200).json(result);
   } catch (error) {
     res.status(404).json(error);
   }
@@ -100,7 +100,7 @@ const deleteUserFeedback = async (req, res) => {
 
     const result = await deleteUserFeedbackService(userId, feedbackId);
 
-    res.status(200).json(result);
+    return res.status(200).json(result);
   } catch (error) {
     res.status(404).json(error);
   }
